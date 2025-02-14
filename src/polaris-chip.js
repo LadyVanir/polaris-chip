@@ -16,7 +16,8 @@ import { LitElement, html, css } from 'lit';
 // We will only stick with Lit for this class and look at Vanilla examples
 // but compatibility across sites / libraries is unique to web components
 // and not a thing in React, Vue, Angular, etc
-export class PolarisChip extends LitElement {
+export class PolarisChip extends LitElement 
+{
   // this is not a requirement, but it's a convention I personally enjoy
   // because it helps when looking at multiple elements. I open this file
   // I glance and go "oh the HTML tag for this code is called polaris-chip"
@@ -29,6 +30,7 @@ export class PolarisChip extends LitElement {
     super();
     // a variable on this object called title
     this.title = 'Chip Default';
+    this.link = '#';
   }
 
   // CSS styles are scoped JUST to this element. This uses a technology called
@@ -36,9 +38,11 @@ export class PolarisChip extends LitElement {
   // things, it's incredible. It automatically ensures that the things in your render()
   // method below it look exactly the same always no matter where they are loaded!
   static get styles() {
-    // "css" called here is actually a function exported from Lit at the top
-    // so that it scopes the CSS nicely and also applies sanitization
     return css`
+      :host {
+        display: inline-block;
+        margin: 16px;
+      }
     /*
       :host is a special selector meaning "the tag itself"
       Think of if we were looking at how a <strong> tag is made. It would have
@@ -49,15 +53,16 @@ export class PolarisChip extends LitElement {
         display: inline-flex;
       }
 
-      span {
-        background-color: orange;
+      a {
+        background-color: var(--polaris-chip-background-color, orange);
         color: black;
         font-size: 24px;
         padding: 16px;
         margin: 8px;
       }
-
-      span:hover {
+      a:focus,
+      a:active,
+      a:hover {
         background-color: grey;
         border: 1px solid black;
       }
@@ -72,6 +77,7 @@ export class PolarisChip extends LitElement {
    * @returns an HTML template which gets sanitized and rendered
    */
   render() {
+
     // html much like css above applies sanitization / security and ensures
     // there is a valid HTML template that is displayed on screen. It's important
     // to keep in mind that any broken HTML tags or JS variables here can cause
@@ -83,7 +89,8 @@ export class PolarisChip extends LitElement {
     // it is going to print the title of the element. The magic of Lit is that
     // when title is changed (even by inspecting the document and hacking the value)
     // it will automatically update what is displayed and do so incredibly quickly
-    return html`<span>${this.title}</span>`;
+    return html`<a href=${this.link}>${this.title}</a>`;
+
   }
 
   // LitElement uses the properties call to do the following:
@@ -95,6 +102,7 @@ export class PolarisChip extends LitElement {
     return {
       // this is a String. Array, Object, Number, Boolean are other valid values here
       title: { type: String },
+      link: { type: String}, 
     };
   }
 }
