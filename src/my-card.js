@@ -11,11 +11,10 @@ export class MyCard extends LitElement {
 
   constructor() {
     super();
-    this.title = 'My Card';
-    this.image =
-      'https://th.bing.com/th/id/R.f7b805f8d6aebf6d73c6ca65469a7d1e?rik=TqknlK%2b%2bXuBIVQ&riu=http%3a%2f%2fclipart-library.com%2fimages_k%2fairplane-clipart-transparent-background%2fairplane-clipart-transparent-background-13.png&ehk=rpC8t5wR6CTJSZpqdsUZfPnvQC7BgJqtoC1VobnYnbQ%3d&risl=&pid=ImgRaw&r=0';
-    this.link = 'https://hax.psu.edu';
-    this.fancy = true;
+    this.title = "#";
+    this.image = "#";
+    this.link = "#";
+    this.fancy = false;
   }
 
   static get properties() {
@@ -23,7 +22,7 @@ export class MyCard extends LitElement {
       fancy: { type: Boolean, reflect: true },
       image: { type: String },
       link: { type: String },
-      title: { type: String },
+      title: { type: String},
     };
   }
 
@@ -47,13 +46,11 @@ export class MyCard extends LitElement {
       }
 
       .card {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        overflow: hidden;
-        width: 300px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          background-color: white; 
+          width: 400px;
+          text-align: center;
       }
-
+   
       .card img {
         width: 100%;
         height: auto;
@@ -66,20 +63,33 @@ export class MyCard extends LitElement {
       }
 
       .btn {
-        display: inline-block;
-        margin: 16px;
-        padding: 8px 16px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        text-decoration: none;
-        cursor: pointer;
-        text-align: center;
+     color: gray;
+     background-color: white;
+     font-size: 16px;
+     margin: 0px 0px 6px 0;
       }
-
+      .btn:focus,
       .btn:hover {
         background-color: #0056b3;
+        color: white;
+      }
+      details summary
+      {
+        text-align: center;
+        font-size: 16px;
+        padding: 8px 0;
+        color: yellow;
+      }
+      details[open] summary{
+        font-weight: bold;
+      }
+      details div 
+      {
+        border: 2px solid black;
+        text-align: center;
+        padding: 8px;
+        height: 70px;
+        overflow: auto;
       }
     `;
   }
@@ -96,19 +106,24 @@ openChanged(e) {
 
   render() {
     return html`
+    <div id = "cardlist">
       <div class="card">
-        <h1 class="cardheader">${this.title}</h1>
+        <h1 class="card-title">${this.title}</h1>
         <img src="${this.image}" alt="${this.title}" />
-        <div class="card-title">${this.title}</div>
-       <!-- put this in your render method where you had details -->
-  <details ?open="${this.fancy}" @toggle="${this.openChanged}">
-
-        <summary> Description </summary>
+     
+        <details ?open="${this.fancy}" @toggle="${this.openChanged}">
+        <summary>Description</summary>
         <div>
         <slot> </slot>
+    
         <a href="${this.link}" target="_blank" rel="noopener noreferrer">
-          <button class="btn">Details</button>
+          <button class="btn">Details</button
+>
+           <!-- put this in your render method where you had details -->
+ 
         </a>
+      </div>
+      </details>
       </div>
       </div>
     `;
