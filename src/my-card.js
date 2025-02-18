@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import "@haxtheweb/meme-maker/meme-maker.js";
 
 /**
  * MyCard: A customizable card component.
@@ -30,10 +31,14 @@ export class MyCard extends LitElement {
     return css`
       :host {
         display: block;
+        display: inline-block;
       }
 
-      :host([fancy]) .card {
+      :host([fancy]) .card 
+      {
         background-color: blue; 
+        border: 2px solid blocl;
+        width: 400px;
       }
 
       :host(:not([fancy])) .card {
@@ -49,6 +54,8 @@ export class MyCard extends LitElement {
           background-color: white; 
           width: 400px;
           text-align: center;
+          border-radius:10px;
+          padding: 16px;
       }
    
       .card img {
